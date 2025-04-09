@@ -1,0 +1,14 @@
+.container {
+    background-color: blue;
+    padding: 1em;
+    border: 5px solid red;
+    margin: .5em;
+}
+
+.element {
+    background-color: yellow;
+    padding: 1em;
+    border: 5px solid purple;
+    margin: .5em;
+    width: 170px;
+}
