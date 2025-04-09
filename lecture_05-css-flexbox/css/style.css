@@ -1,0 +1,75 @@
+/* general styling */
+h1, h2, h3 {
+  font-family: 'Helvetica';
+}
+
+h2 {
+  color: rebeccapurple;
+}
+
+
+/* nav bar */
+nav {
+  color: white;
+  background-color: #4b2e83;
+}
+
+nav a {
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap:wrap;
+}
+
+nav li {
+  display: inline;
+  margin: .25em;
+}
+
+
+/* about section */
+.about-section {
+  background-color: #f8f8f8;
+}
+
+.about-section p {
+  font-family: "Edu AU VIC WA NT Hand", cursive;
+  font-size: 1em;
+  padding: 0;
+  margin: 1em 0;
+}
+
+.about-section img {
+  max-width: 150px;
+}
+
+
+/* topics cards */
+.card-deck {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+
+.topics-section .card {
+  border: 1px solid black;
+  flex-grow: 1;
+  padding: 10px;
+  margin: 3px;
+  text-align: center;
+}
+
+.topics-section img {
+  max-height: 150px;
+}
+
+/* other */
+footer {
+  font-size: smaller;
+  border: solid;
+  padding: .5em;
+  margin: .5em 0;
+}
