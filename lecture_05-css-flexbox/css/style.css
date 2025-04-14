@@ -28,6 +28,10 @@ nav a {
   max-width: 150px;
 }
 
+.about-section p {
+  font-family: "Edu AU VIC WA NT Hand", cursive ;
+}
+
 
 /* topics cards */
 .topics-section .card {
