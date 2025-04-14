@@ -11,4 +11,5 @@
     border: 5px solid purple;
     margin: .5em;
     width: 170px;
+    display: inline;
 }
