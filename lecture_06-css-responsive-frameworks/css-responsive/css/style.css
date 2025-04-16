@@ -71,3 +71,10 @@ main {
 footer {
   font-size: smaller;
 }
+
+/* media queries */
+@media (min-width: 500px) {
+  body {
+    background-color: pink;
+  }
+}
