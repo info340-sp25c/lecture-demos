@@ -50,23 +50,26 @@
 // people['fred'] = 22
 // console.log('object', people, people['sarah'], people.sarah["fav foods"])
 
-const people = [
-    {name: 'Ada', height: 64},
-    {name: 'Bob', height: 74},
-    {name: 'Chris', height: 69},
-    {name: 'Diya', height: 64},
-    {name: 'Emma', height: 78},
-]
+// const people = [
+//     {name: 'Ada', height: 64},
+//     {name: 'Bob', height: 74},
+//     {name: 'Chris', height: 69},
+//     {name: 'Diya', height: 64},
+//     {name: 'Emma', height: 78},
+// ]
 
-console.log('people', people)
+// console.log('people', people)
 
-for(const person of people) {
-    console.log("height", person.height);
-}
+// for(const person of people) {
+//     console.log("height", person.height);
+// }
 
-function greet(greeting, name){
-    console.log("i am greeting someone!!!")
-    return greeting + ', ' + name
-}
+// function greet(greeting, name){
+//     console.log("i am greeting someone!!!")
+//     return greeting + ', ' + name
+// }
 
-console.log(greet("hello", "Kristen"))
+// console.log(greet("hello", "Kristen"))
+
+let userInput = document.getElementById("pretendUserInput");
+console.log('user input', userInput);
