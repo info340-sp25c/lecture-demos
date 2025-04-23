@@ -74,10 +74,21 @@
 function buttonOne() {
     console.log("logging button one function")
 
-    let randomNumber = Math.floor(Math.random() * 100);
+    let randomNumber = getRandomNumber();
 
     console.log("random", randomNumber);
     document.getElementById("resultsDiv").innerText = randomNumber
+}
+
+function buttonTwo(){
+    let randomNumber = getRandomNumber()
+    alert(randomNumber)
+}
+
+function getRandomNumber() {
+    let randomNumber = Math.floor(Math.random() * 100);
+    console.log(randomNumber)
+    return randomNumber
 }
 
 let userInput = document.getElementById("pretendUserInput");
