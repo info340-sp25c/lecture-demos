@@ -71,31 +71,79 @@
 
 // console.log(greet("hello", "Kristen"))
 
-function buttonOne() {
-    console.log("logging button one function")
+// function buttonOne() {
+//     console.log("logging button one function")
 
-    let randomNumber = getRandomNumber();
+//     let randomNumber = getRandomNumber();
 
-    console.log("random", randomNumber);
-    document.getElementById("resultsDiv").innerText = randomNumber
+//     console.log("random", randomNumber);
+//     document.getElementById("resultsDiv").innerText = randomNumber
+// }
+
+// function buttonTwo(){
+//     let randomNumber = getRandomNumber()
+//     alert(randomNumber)
+// }
+
+// function getRandomNumber() {
+//     let randomNumber = Math.floor(Math.random() * 100);
+//     console.log(randomNumber)
+//     return randomNumber
+// }
+
+// let userInput = document.getElementById("pretendUserInput");
+
+// let resultsDiv = document.getElementById("resultsDiv");
+// console.log('user input, results', userInput, resultsDiv);
+
+// document.getElementById("resultsDiv").innerText = "Hello World!"
+// document.getElementById("resultsDiv").style.backgroundColor = "red"
+
+// function sayHello(name) {
+//     console.log("hello ", name)
+// }
+
+// console.log("type", typeof(sayHello))
+// const other = sayHello
+
+// // other("everyone")
+
+// // console.log("1", sayHello)
+// // console.log("2", sayHello("name"))
+
+// function numberOne(){
+//     console.log("one!")
+// }
+
+// function numberTwo(){
+//     console.log("two!")
+// }
+
+// function callTwoFunctions(one, two){
+//     one()
+//     two()
+// }
+
+// callTwoFunctions(numberOne, numberTwo)
+
+// const arr = ["a", "b", "c"]
+// arr.forEach(function(item){
+//     console.log("item", item)
+// })
+
+function square(n) {
+    return n*n
 }
 
-function buttonTwo(){
-    let randomNumber = getRandomNumber()
-    alert(randomNumber)
+const numbers = [1, 2, 3, 4, 5]
+
+const squares = []
+
+for (let i=0; i<numbers.length; i++){
+    const transformed = square(numbers[i])
+    squares.push(transformed)
 }
+console.log(squares)
 
-function getRandomNumber() {
-    let randomNumber = Math.floor(Math.random() * 100);
-    console.log(randomNumber)
-    return randomNumber
-}
-
-let userInput = document.getElementById("pretendUserInput");
-
-let resultsDiv = document.getElementById("resultsDiv");
-console.log('user input, results', userInput, resultsDiv);
-
-document.getElementById("resultsDiv").innerText = "Hello World!"
-document.getElementById("resultsDiv").style.backgroundColor = "red"
-
+const squaresFromMap = numbers.map(square)
+console.log(squaresFromMap)
