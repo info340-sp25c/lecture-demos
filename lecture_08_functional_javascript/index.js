@@ -156,8 +156,12 @@ console.log("greater than three", greaterThanThree)
 
 const phoneDigits = [8, 6, 7, 5, 3, 0, 9]
 
-const largestDigit = phoneDigits.reduce(function(one, two){
-    return one > two
+const largestDigit = phoneDigits.reduce(function(prev, curr){
+    if (prev > curr) {
+        return prev
+    } else {
+        return curr
+    }
 })
 
 console.log(largestDigit)
