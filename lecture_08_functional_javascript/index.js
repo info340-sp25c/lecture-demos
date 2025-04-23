@@ -147,3 +147,17 @@ console.log(squares)
 
 const squaresFromMap = numbers.map(square)
 console.log(squaresFromMap)
+
+const greaterThanThree = numbers.filter(function(n){
+    return n > 3
+})
+
+console.log("greater than three", greaterThanThree)
+
+const phoneDigits = [8, 6, 7, 5, 3, 0, 9]
+
+const largestDigit = phoneDigits.reduce(function(one, two){
+    return one > two
+})
+
+console.log(largestDigit)
