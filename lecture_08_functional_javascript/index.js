@@ -71,6 +71,15 @@
 
 // console.log(greet("hello", "Kristen"))
 
+function buttonOne() {
+    console.log("logging button one function")
+
+    let randomNumber = Math.floor(Math.random() * 100);
+
+    console.log("random", randomNumber);
+    document.getElementById("resultsDiv").innerText = randomNumber
+}
+
 let userInput = document.getElementById("pretendUserInput");
 
 let resultsDiv = document.getElementById("resultsDiv");
