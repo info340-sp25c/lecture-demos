@@ -72,4 +72,10 @@
 // console.log(greet("hello", "Kristen"))
 
 let userInput = document.getElementById("pretendUserInput");
-console.log('user input', userInput);
+
+let resultsDiv = document.getElementById("resultsDiv");
+console.log('user input, results', userInput, resultsDiv);
+
+document.getElementById("resultsDiv").innerText = "Hello World!"
+document.getElementById("resultsDiv").style.backgroundColor = "red"
+
