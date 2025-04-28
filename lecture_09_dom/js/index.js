@@ -7,3 +7,15 @@ const songArray = [
   { artist: "Taylor Swift", title: "Cruel Summer", youtubeUrl: "https://www.youtube.com/watch?v=ic8j13piAhQ"
   }
 ];
+
+const phoneDigits = [8, 6, 7, 5, 3, 0, 9]
+
+const largestDigit = phoneDigits.reduce(function(prev, curr){
+  if (prev > curr){
+    return prev
+  } else {
+    return curr
+  }
+})
+
+console.log("largest digit", largestDigit)
