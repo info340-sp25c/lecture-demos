@@ -47,3 +47,14 @@ newParagraph.textContent = "this is content from my index.js"
 
 const mainElem = document.querySelector('main')
 mainElem.appendChild(newParagraph)
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+  button.addEventListener('click', function(event){
+    event.preventDefault()
+    console.log("button was clicked, here is the target", event.target, event)
+  })
+})
+
+
