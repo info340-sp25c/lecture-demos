@@ -48,13 +48,33 @@ newParagraph.textContent = "this is content from my index.js"
 const mainElem = document.querySelector('main')
 mainElem.appendChild(newParagraph)
 
-const buttons = document.querySelectorAll("button");
+// const buttons = document.querySelectorAll("button");
 
-buttons.forEach(button => {
-  button.addEventListener('click', function(event){
-    event.preventDefault()
-    console.log("button was clicked, here is the target", event.target, event)
-  })
+// buttons.forEach(button => {
+//   button.addEventListener('click', function(event){
+//     event.preventDefault()
+//     console.log("button was clicked, here is the target", event.target, event)
+//   })
+// })
+
+const imageArray = [
+  "img/cookie.png",
+  "img/happy.png",
+  "img/husky.jpg",
+  "img/puppy.jpg",
+  "img/surprised.png",
+]
+
+let index = 0;
+
+const switchButton = document.querySelector('button');
+switchButton.addEventListener('click', function(event){
+  console.log("click", event.target)
+  let image = document.querySelector("#puppySection img")
+  //image.src = "img/cookie.png"
+  index = index%5;
+  image.src = imageArray[index];
+  index++;
 })
 
 
