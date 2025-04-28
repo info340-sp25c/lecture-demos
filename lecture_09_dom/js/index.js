@@ -8,6 +8,28 @@ const songArray = [
   }
 ];
 
+// create a <li> with an <a> inside pointing to youtube
+// function takes a songObject, which should have artist, title, youtubeurl
+function createSongListItem(songObject){
+ const newLinkElem = document.createElement('a');
+ newLinkElem.href = songObject.youtubeUrl;
+ newLinkElem.textContent = songObject.artist + " - " + songObject.title;
+
+  const newLiElem = document.createElement('li');
+  newLiElem.appendChild(newLinkElem)
+
+  return newLiElem;
+}
+
+const olElem = document.createElement('ol');
+for(const song of songArray){
+  const theLi = createSongListItem(song);
+  olElem.appendChild(theLi);
+}
+
+const dataSectionElem = document.querySelector('#dataSection');
+dataSectionElem.appendChild(olElem);
+
 // const phoneDigits = [8, 6, 7, 5, 3, 0, 9]
 
 // const largestDigit = phoneDigits.reduce(function(prev, curr){
