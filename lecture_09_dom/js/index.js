@@ -21,14 +21,18 @@ function createSongListItem(songObject){
   return newLiElem;
 }
 
-const olElem = document.createElement('ol');
-for(const song of songArray){
-  const theLi = createSongListItem(song);
-  olElem.appendChild(theLi);
+function renderSongs() {
+  const olElem = document.createElement('ol');
+  for(const song of songArray){
+    const theLi = createSongListItem(song);
+    olElem.appendChild(theLi);
+  }
+  
+  const dataSectionElem = document.querySelector('#dataSection');
+  dataSectionElem.appendChild(olElem);
 }
 
-const dataSectionElem = document.querySelector('#dataSection');
-dataSectionElem.appendChild(olElem);
+renderSongs()
 
 // const phoneDigits = [8, 6, 7, 5, 3, 0, 9]
 
@@ -75,6 +79,22 @@ switchButton.addEventListener('click', function(event){
   index = index%5;
   image.src = imageArray[index];
   index++;
+})
+
+const formButton = document.querySelector('#formSection form');
+formButton.addEventListener('submit', function(event){
+  event.preventDefault()
+  console.log("submit button clicked", event.target)
+  const artistVal = document.querySelector('#artistInput').value;
+  const titleVal = document.querySelector('#titleInput').value;
+  const youtubeVal = document.querySelector('#urlInput').value;
+  const newSongObj = {
+    artist: artistVal,
+    title: titleVal,
+    youtubeUrl: youtubeVal
+  }
+  songArray.push(newSongObj)
+  renderSongs()
 })
 
 
