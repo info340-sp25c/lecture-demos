@@ -1,12 +1,6 @@
 'use strict';
 
-const monsterArray = [
-  {name: 'Dracula', type: 'vampire', height: 64},
-  {name: 'Frankenstein', type: 'zombie', height: 74},
-  {name: 'Mr. Hyde', type: 'mad scientist', height: 69},
-  {name: 'Mummy', type: 'mummy', height: 69},
-  {name: 'Creature from the Black Lagoon', type: 'fish', height: 71}
-]
+import { monsterArray } from './other.js'
 console.log(monsterArray);
 
 const sayHello = (name) => {
@@ -36,4 +30,4 @@ const monsterCopy = {...monsterArray[0]}
 console.log(monsterCopy)
 
 const monster2Copy = {...monsterArray[0], Height: 75, alternateForm: "bat", age: 150}
-console.log(monster2Copy);
+console.log(monster2Copy, "this is another monster");
