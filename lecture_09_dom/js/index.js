@@ -29,6 +29,13 @@ function renderSongs() {
   }
   
   const dataSectionElem = document.querySelector('#dataSection');
+  
+  let dataNodes = document.querySelectorAll("#dataSection ol")
+
+  if(dataNodes.length > 1){
+    dataNodes[1].remove()
+  }
+  
   dataSectionElem.appendChild(olElem);
 }
 
