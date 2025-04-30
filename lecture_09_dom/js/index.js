@@ -76,6 +76,17 @@ const imageArray = [
   "img/surprised.png",
 ]
 
+titleArray: [
+
+]
+// strategies:
+// 1. map/transform the imageArray 
+// to create a title object, based on the picture 
+// naming conventions
+// 2. use existing loop/index to split the image string and create a title
+// 3. update image array to be an array of objects, with image source AND title
+// 4. two different arrays, one for images, one for titles
+
 let index = 0;
 
 const switchButton = document.querySelector('button');
