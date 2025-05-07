@@ -1,8 +1,9 @@
 import React from 'react';
+import { HeaderBar } from './Header';
 
 function App(props) {
   return (
-    <h1 className="bg-primary text-light px-1">Hello App</h1>
+    <HeaderBar />
   );
 }
 
