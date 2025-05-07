@@ -1,9 +1,11 @@
 import React from 'react';
 import { HeaderBar } from './Header';
 
+const myNameFromDB = "Kristen"
+
 function App(props) {
   return (
-    <HeaderBar />
+    <HeaderBar myName={myNameFromDB} />
   );
 }
 
