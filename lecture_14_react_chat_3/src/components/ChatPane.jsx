@@ -1,74 +1,75 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import { ComposeForm } from './ComposeForm.jsx';
 
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
-  console.log("rendering chatpane")
-  const { currentChannel } = props;
+  console.log('props', props)
+  console.log("rendering the ChatPane")
+  const [count, setCount] = useState(0);
+  const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG);
 
-  const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG); 
-  console.log(msgStateArray);
+  const {currentChannel} = props;
+  // console.log('current channel', currentChannel)
 
-  /* STATE MANAGEMENT: how do we change */
-  const addMessage = function(userObj, messageText, channel) {
-    console.log("addmsg")
-    const newMessage = {
-      "userId": userObj.userId,
-      "userName": userObj.userName,
-      "userImg": userObj.userImg,
-      "text": messageText,
-      "timestamp": Date.now(),
-      "channel": channel
-    }
-    console.log(newMessage);
-    const newArray = [...msgStateArray, newMessage];
-    setMsgStateArray(newArray); //update the board & re-render
-  }
-
-  /* RENDERING: what do we look like */
-
-  //Step 1. data processing
   //data: an array of message objects [{}, {}]
-  const orderedMessageArray = msgStateArray
-    .sort((m1, m2) => m2.timestamp - m1.timestamp); //reverse chron order
-  //filter for only channel stuff
-  const channelMessages = orderedMessageArray.filter((msgObj) => {
-    return msgObj.channel === currentChannel;
-  })
+  const messageObjArray = msgStateArray
+    .sort((m1, m2) => m1.timestamp - m2.timestamp) //chron order
+    .filter((msgObj) => msgObj.channel == currentChannel)
 
-  //Step 2. convert data to views
+    console.log('messages', messageObjArray)
+
+  const addDataToArray = (text)=> {
+    // create mock data messageItem
+    const messageItem = {
+      "channel": currentChannel,
+      "text": text,
+      "timestamp": Date.now(),
+      "userId": "penguin", //TODO: hook up to auth later
+      "userName": "Penguin",
+      "userImg": "/img/Penguin.png"
+     }
+    // create new msgStateArray
+     const newMsgStateArr = [...msgStateArray, messageItem]
+
+    // set new msgStateArray
+    setMsgStateArray(newMsgStateArr)
+  }
   //views: DOM content [<MessageItem/>, <MessageItem/>]
-  const messageItemArray = channelMessages.map((chatObj) => {
-      const elem = <MessageItem messageData={chatObj} key={chatObj.timestamp} />
+  const messageItemArray = messageObjArray.map((chatObj) => {
+      const elem = <MessageItem key={chatObj.timestamp} messageData={chatObj} />
       return elem; //put it in the new array!
   });
 
+  const handleClick = (event) => {
+    // console.log('click!', event, event.target);
+    setCount(count + 1)
+    addDataToArray("I clicked the green Click me button!")
+  }
+
   return (
     <>
-      <div className="scrollable-pane pt-2 my-2">
-        {/* conditional rendering */}
-        { messageItemArray.length === 0 && 
-          <p>No messages yet</p>
-        }
+      <div className="scrollable-pane">
+        {/* button demo */}
+        <div className="pt-2 my-2">
+          <button className="btn btn-success" onClick={handleClick}>Click me!</button>
+          <p>You clicked me {count} times</p>
+        </div>
+        <hr/>
 
         {/* Messages */}
         {messageItemArray}
       </div>
 
-      <ComposeForm currentChannel={currentChannel} addMessageFunction={addMessage} />
-      </>
+      <ComposeForm addData={addDataToArray} />
+    </>
   )
 }
 
 function MessageItem(props) {
   const msgObj = props.messageData;
   const {userName, userImg, text} = msgObj;
-
-  const handleClick = (event) => {
-    console.log("You like a post by "+userName);
-  }
 
   let buttonColor = "grey";
 
@@ -80,7 +81,7 @@ function MessageItem(props) {
     <div className="flex-grow-1">
       <p className="user-name">{userName}</p>
       <p>{text}</p>
-      <button className="btn like-button" onClick={handleClick}>
+      <button className="btn like-button">
           <span className="material-icons" style={{ color: buttonColor }}>favorite_border</span>
       </button>
     </div>

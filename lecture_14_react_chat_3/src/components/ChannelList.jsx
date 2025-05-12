@@ -1,13 +1,7 @@
 import React from 'react';
 
 export function ChannelList(props) {
-  const {channelNames, currentChannel} = props;
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    const linkName = event.target.name;
-    console.log("Clicked on", linkName);
-  }
+  const {channelNames, currentChannel, clicky} = props;
 
   const elemArray = channelNames.map((channelNameString) => {
     let classListString = "px-2";
@@ -16,10 +10,8 @@ export function ChannelList(props) {
     }
 
     const transformed = (
-      <li className={classListString} key={channelNameString}>
-        <a name={channelNameString} href={"/"+channelNameString} onClick={handleClick}>
-          {channelNameString}
-        </a>
+      <li className={classListString} key={channelNameString} onClick={clicky}>
+        <a href={"/"+channelNameString}>{channelNameString}</a>
       </li>
     );
 
