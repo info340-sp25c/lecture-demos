@@ -9,8 +9,12 @@ export function ChannelList(props) {
       classListString += " bg-warning";
     }
 
+    const handleClick = (event) => {
+      event.preventDefault()
+    }
+
     const transformed = (
-      <li className={classListString} key={channelNameString}>
+      <li className={classListString} key={channelNameString} onClick={handleClick}>
         <a href={"/"+channelNameString}>{channelNameString}</a>
       </li>
     );

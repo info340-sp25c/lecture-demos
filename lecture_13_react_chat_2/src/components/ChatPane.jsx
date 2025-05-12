@@ -5,13 +5,18 @@ import { ComposeForm } from './ComposeForm.jsx';
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
+  console.log('props', props)
   console.log("rendering the ChatPane")
   const [count, setCount] = useState(0);
+  const {currentChannel} = props;
+  console.log('current channel', currentChannel)
 
   //data: an array of message objects [{}, {}]
   const messageObjArray = INITIAL_CHAT_LOG
-    .sort((m1, m2) => m1.timestamp - m2.timestamp); //chron order
+    .sort((m1, m2) => m1.timestamp - m2.timestamp) //chron order
+    .filter((msgObj) => msgObj.channel == currentChannel)
 
+    console.log('messages', messageObjArray)
   //views: DOM content [<MessageItem/>, <MessageItem/>]
   const messageItemArray = messageObjArray.map((chatObj) => {
       const elem = <MessageItem key={chatObj.timestamp} messageData={chatObj} />
