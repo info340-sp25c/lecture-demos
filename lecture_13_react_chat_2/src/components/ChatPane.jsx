@@ -17,12 +17,16 @@ export function ChatPane(props) {
       return elem; //put it in the new array!
   });
 
+  const handleClick = (event) => {
+    console.log('click!', event, event.target);
+  }
+
   return (
     <>
       <div className="scrollable-pane">
         {/* button demo */}
         <div className="pt-2 my-2">
-          <button className="btn btn-success">Click me!</button>
+          <button className="btn btn-success" onClick={handleClick}>Click me!</button>
           <p>You clicked me X times</p>
         </div>
         <hr/>
