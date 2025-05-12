@@ -8,15 +8,34 @@ export function ChatPane(props) {
   console.log('props', props)
   console.log("rendering the ChatPane")
   const [count, setCount] = useState(0);
+  const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG);
+
   const {currentChannel} = props;
-  console.log('current channel', currentChannel)
+  // console.log('current channel', currentChannel)
 
   //data: an array of message objects [{}, {}]
-  const messageObjArray = INITIAL_CHAT_LOG
+  const messageObjArray = msgStateArray
     .sort((m1, m2) => m1.timestamp - m2.timestamp) //chron order
     .filter((msgObj) => msgObj.channel == currentChannel)
 
     console.log('messages', messageObjArray)
+
+  const addDataToArray = (text)=> {
+    // create mock data messageItem
+    const messageItem = {
+      "channel": currentChannel,
+      "text": text,
+      "timestamp": Date.now(),
+      "userId": "penguin", //TODO: hook up to auth later
+      "userName": "Penguin",
+      "userImg": "/img/Penguin.png"
+     }
+    // create new msgStateArray
+     const newMsgStateArr = [...msgStateArray, messageItem]
+
+    // set new msgStateArray
+    setMsgStateArray(newMsgStateArr)
+  }
   //views: DOM content [<MessageItem/>, <MessageItem/>]
   const messageItemArray = messageObjArray.map((chatObj) => {
       const elem = <MessageItem key={chatObj.timestamp} messageData={chatObj} />
@@ -26,6 +45,7 @@ export function ChatPane(props) {
   const handleClick = (event) => {
     // console.log('click!', event, event.target);
     setCount(count + 1)
+    addDataToArray("I clicked the green Click me button!")
   }
 
   return (
