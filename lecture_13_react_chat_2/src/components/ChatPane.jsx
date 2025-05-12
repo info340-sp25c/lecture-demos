@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ComposeForm } from './ComposeForm.jsx';
 
@@ -6,6 +6,7 @@ import INITIAL_CHAT_LOG from '../data/chat_log.json'
 
 export function ChatPane(props) {
   console.log("rendering the ChatPane")
+  const [count, setCount] = useState(0);
 
   //data: an array of message objects [{}, {}]
   const messageObjArray = INITIAL_CHAT_LOG
@@ -18,7 +19,8 @@ export function ChatPane(props) {
   });
 
   const handleClick = (event) => {
-    console.log('click!', event, event.target);
+    // console.log('click!', event, event.target);
+    setCount(count + 1)
   }
 
   return (
@@ -27,7 +29,7 @@ export function ChatPane(props) {
         {/* button demo */}
         <div className="pt-2 my-2">
           <button className="btn btn-success" onClick={handleClick}>Click me!</button>
-          <p>You clicked me X times</p>
+          <p>You clicked me {count} times</p>
         </div>
         <hr/>
 
