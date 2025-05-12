@@ -62,7 +62,7 @@ export function ChatPane(props) {
         {messageItemArray}
       </div>
 
-      <ComposeForm />
+      <ComposeForm addData={addDataToArray} />
     </>
   )
 }
