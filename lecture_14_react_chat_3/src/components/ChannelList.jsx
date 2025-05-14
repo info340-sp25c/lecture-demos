@@ -1,17 +1,17 @@
 import React from 'react';
 
 export function ChannelList(props) {
-  const {channelNames, currentChannel, clicky} = props;
+  const { channelNames, currentChannel, clicky, messageCounts } = props;
 
   const elemArray = channelNames.map((channelNameString) => {
     let classListString = "px-2";
-    if(channelNameString === currentChannel) { //on current channel
+    if (channelNameString === currentChannel) { //on current channel
       classListString += " bg-warning";
     }
 
     const transformed = (
       <li className={classListString} key={channelNameString} onClick={clicky}>
-        <a href={"/"+channelNameString}>{channelNameString}</a>
+        <a href={"/" + channelNameString}>{channelNameString} ({messageCounts[channelNameString] || 0})</a>
       </li>
     );
 
