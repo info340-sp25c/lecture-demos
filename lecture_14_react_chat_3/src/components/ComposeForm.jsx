@@ -15,7 +15,13 @@ export function ComposeForm(props) {
   return (
     <form className="my-2">
       <div className="input-group">
-        <textarea className="form-control" rows="2" placeholder="Type a new message" onChange={handleChange}>{inputtedText}</textarea>
+        <textarea
+          className="form-control"
+          rows="2"
+          placeholder="Type a new message"
+          onChange={handleChange}
+          value={inputtedText}
+        />
         <button className="btn btn-secondary" type="button" onClick={handleClick}>
           <span className="material-icons">send</span>
         </button>
