@@ -50,9 +50,9 @@ function App(props) {
 
   const handleChannelClick = (event) => {
     event.preventDefault();
-    console.log("clicked on channel", event.target, event.target.innerText)
+    console.log("clicked on channel", event.target.innerText, event.target.innerText.split(' (')[0])
     // todo: actually set channel
-    setCurrentChannel(event.target.innerText)
+    setCurrentChannel(event.target.innerText.split(' (')[0])
   }
 
   return (
