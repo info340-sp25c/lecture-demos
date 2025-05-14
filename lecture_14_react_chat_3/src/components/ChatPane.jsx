@@ -6,11 +6,10 @@ import { ComposeForm } from './ComposeForm.jsx';
 
 export function ChatPane(props) {
   console.log('props', props)
-  const { msgStateArray, addDataToArray } = props
+  const { msgStateArray, addDataToArray, currentChannel, currentUser } = props
   console.log("rendering the ChatPane")
   const [count, setCount] = useState(0);
 
-  const { currentChannel } = props;
   // console.log('current channel', currentChannel)
 
   //data: an array of message objects [{}, {}]
@@ -30,7 +29,7 @@ export function ChatPane(props) {
   const handleClick = (event) => {
     // console.log('click!', event, event.target);
     setCount(count + 1)
-    addDataToArray("I clicked the green Click me button!")
+    addDataToArray("I clicked the green Click me button!", currentUser)
   }
 
   return (
@@ -47,7 +46,10 @@ export function ChatPane(props) {
         {messageItemArray}
       </div>
 
-      <ComposeForm addData={addDataToArray} />
+      <ComposeForm
+        addData={addDataToArray}
+        currentUser={currentUser}
+      />
     </>
   )
 }

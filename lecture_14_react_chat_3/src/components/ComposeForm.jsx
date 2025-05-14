@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 export function ComposeForm(props) {
-  const { addData } = props
+  const { addData, currentUser } = props
   const [inputtedText, setInputtedText] = useState('');
 
   const handleClick = (event) => {
-    addData(inputtedText)
+    addData(inputtedText, currentUser)
   }
   const handleChange = (event) => {
     const typedValue = event.target.value;

@@ -1,29 +1,27 @@
 import React from 'react';
 
-const DEFAULT_USERS = [
-  {userId: null, userName: null, userImg: '/img/null.png'}, //null user
-  {userId: "penguin", userName: "Penguin", userImg: '/img/Penguin.png'},
-  {userId: "parrot", userName: "Parrot", userImg: '/img/Parrot.png'},
-  {userId: "zebra", userName: "Zebra", userImg: '/img/Zebra.png'},  
-]
-
 export function HeaderBar(props) {
-
+  const { usersData, currentUser, login } = props
   //event handler
   const handleClick = (event) => {
     const whichUser = event.currentTarget.name //access button, not image
-    const selectedUserObj = DEFAULT_USERS.filter((userObj) => userObj.userId === whichUser)[0] || DEFAULT_USERS[0] //null user if not found
+    const selectedUserObj = usersData.filter((userObj) => userObj.userId === whichUser)[0] || usersData[0] //null user if not found
 
     console.log(selectedUserObj);
     //do something with userObj!
+    login(selectedUserObj)
   }
 
   //for convenience
-  const userButtons = DEFAULT_USERS.map((userObj) => {
+  const userButtons = usersData.map((userObj) => {
     let classListString = "btn user-icon"
 
+    if (userObj.userId == currentUser.userId) {
+      classListString += " bg-success"
+    }
+
     return (
-      <button className={classListString} key={userObj.userName} 
+      <button className={classListString} key={userObj.userName}
         name={userObj.userId} onClick={handleClick}
       >
         <img src={userObj.userImg} alt={userObj.userName + " avatar"} />

@@ -4,7 +4,12 @@ import { HeaderBar } from './HeaderBar.jsx';
 import { ChannelList } from './ChannelList.jsx';
 import { ChatPane } from './ChatPane.jsx';
 import INITIAL_CHAT_LOG from '../data/chat_log.json'
-
+const DEFAULT_USERS = [
+  { userId: null, userName: null, userImg: '/img/null.png' }, //null user
+  { userId: "penguin", userName: "Penguin", userImg: '/img/Penguin.png' },
+  { userId: "parrot", userName: "Parrot", userImg: '/img/Parrot.png' },
+  { userId: "zebra", userName: "Zebra", userImg: '/img/Zebra.png' },
+]
 
 function App(props) {
 
@@ -12,6 +17,11 @@ function App(props) {
   // const currentChannel = "general";
   const [msgStateArray, setMsgStateArray] = useState(INITIAL_CHAT_LOG);
   const [currentChannel, setCurrentChannel] = useState("general")
+  const [currentUser, setCurrentUser] = useState(DEFAULT_USERS[0])
+
+  const handleUserLogin = (userObject) => {
+    setCurrentUser(userObject);
+  }
 
   // const channelMessageCounts = msgStateArray.reduce((prevMessageCount, currMessageObj) => {
   //   if (!prevMessageCount[currMessageObj.channel]) { // if no count for CHANNEL, init count at 0
@@ -31,15 +41,15 @@ function App(props) {
 
   // console.log('channel message count object', channelMessageCounts, msgCount)
 
-  const addDataToArray = (text) => {
+  const addDataToArray = (text, currentUserObject) => {
     // create mock data messageItem
     const messageItem = {
       "channel": currentChannel,
       "text": text,
       "timestamp": Date.now(),
-      "userId": "penguin", //TODO: hook up to auth later
-      "userName": "Penguin",
-      "userImg": "/img/Penguin.png"
+      "userId": currentUserObject.userId, //TODO: hook up to auth later
+      "userName": currentUserObject.userName,
+      "userImg": currentUserObject.userImg
     }
     // create new msgStateArray
     const newMsgStateArr = [...msgStateArray, messageItem]
@@ -57,7 +67,11 @@ function App(props) {
 
   return (
     <div className="container-fluid d-flex flex-column">
-      <HeaderBar />
+      <HeaderBar
+        usersData={DEFAULT_USERS}
+        currentUser={currentUser}
+        login={handleUserLogin}
+      />
       <div className="row flex-grow-1">
         <div className="col-3">
           <ChannelList
@@ -72,6 +86,7 @@ function App(props) {
             currentChannel={currentChannel}
             msgStateArray={msgStateArray}
             addDataToArray={addDataToArray}
+            currentUser={currentUser}
           />
         </div>
       </div>
