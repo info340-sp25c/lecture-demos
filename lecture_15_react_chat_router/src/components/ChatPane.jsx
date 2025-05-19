@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { ComposeForm } from './ComposeForm.jsx';
+import { useParams } from 'react-router-dom';
 
 export function ChatPane(props) {
 
-  const currentChannel = "general" //hard code for the moment
+  // const currentChannel = "general" //hard code for the moment
   const { messageArray, addMessageFunction, currentUser } = props;
-
+  const urlParamsObj = useParams();
+  const currentChannel = urlParamsObj.whichchannel;
   //RENDERING: what do we look like
 
   //* Data Processing *//
@@ -25,18 +27,18 @@ export function ChatPane(props) {
   return (
     <> {/* fake div */}
       <div className="scrollable-pane pt-2 my-2">
-          {/* conditional rendering */}
-          { messageArray.length === 0 && 
-            <p>No messages found</p>
-          }
+        {/* conditional rendering */}
+        {messageArray.length === 0 &&
+          <p>No messages found</p>
+        }
 
-          {messageItemArray}
-        </div>
+        {messageItemArray}
+      </div>
 
-        <ComposeForm 
-          currentUser={currentUser}
-          currentChannel={currentChannel} 
-          addMessageFunction={addMessageFunction} />
+      <ComposeForm
+        currentUser={currentUser}
+        currentChannel={currentChannel}
+        addMessageFunction={addMessageFunction} />
     </>
   )
 }
@@ -46,29 +48,29 @@ function MessageItem(props) {
 
   const [isLiked, setIsLiked] = useState(false);
 
-  const handleClick = function(event) {
+  const handleClick = function (event) {
     setIsLiked(!isLiked);
   }
 
 
   //decide what it looks like
   let buttonColor = "grey";
-  if(isLiked) {
+  if (isLiked) {
     buttonColor = "red"; //filled in
   }
 
   return (
-   <div className="message d-flex mb-3">
-    <div className="me-2">
-      <img src={userImg} alt={userName+"'s avatar"}/>
-    </div>
-    <div className="flex-grow-1">
-      <p className="user-name">{userName}</p>
-      <p>{text}</p>
-      <button className="btn like-button" onClick={handleClick}>
+    <div className="message d-flex mb-3">
+      <div className="me-2">
+        <img src={userImg} alt={userName + "'s avatar"} />
+      </div>
+      <div className="flex-grow-1">
+        <p className="user-name">{userName}</p>
+        <p>{text}</p>
+        <button className="btn like-button" onClick={handleClick}>
           <span className="material-icons" style={{ color: buttonColor }}>favorite_border</span>
-      </button>
+        </button>
+      </div>
     </div>
-   </div> 
   )
 }

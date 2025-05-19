@@ -41,7 +41,7 @@ function App(props) {
       <Routes>
         <Route path="home?" element={<Static.WelcomePage />} />
         <Route path="about?" element={<Static.AboutPage />} />
-        <Route path="chat?" element={<ChatPage
+        <Route path="chat/:whichchannel?" element={<ChatPage
           currentUser={currentUser}
           messageArray={messageStateArray}
           addMessageFunction={addMessage}
