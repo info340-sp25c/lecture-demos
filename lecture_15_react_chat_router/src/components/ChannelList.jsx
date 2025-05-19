@@ -11,7 +11,7 @@ export function ChannelList(props) {
   const liArray = channelNames.map((channelNameString) => {
     return (
       <div key={channelNameString}>
-        <Link className="px-2"
+        <Link className={channelNameString == currentChannel ? "px-2 bg-success" : "px-2"}
           name={currentChannel}
           to={"/chat/" + channelNameString}
         >

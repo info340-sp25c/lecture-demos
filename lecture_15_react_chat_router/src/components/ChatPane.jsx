@@ -7,7 +7,7 @@ export function ChatPane(props) {
   // const currentChannel = "general" //hard code for the moment
   const { messageArray, addMessageFunction, currentUser } = props;
   const urlParamsObj = useParams();
-  const currentChannel = urlParamsObj.whichchannel;
+  const currentChannel = urlParamsObj.whichchannel ?? "general";
   //RENDERING: what do we look like
 
   //* Data Processing *//
