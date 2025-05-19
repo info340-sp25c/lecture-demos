@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function HeaderBar(props) {
-  const { currentUser }  = props;
+  const { currentUser } = props;
 
   return (
     <header className="text-light bg-primary px-1 d-flex justify-content-between">
@@ -11,7 +11,7 @@ export function HeaderBar(props) {
         {/* links go here */}
         <ul className="nav nav-pills">
           <li className="nav-item">
-            <a className="nav-link" href="/">Home</a>
+            <a className="nav-link" href="/home">Home</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/chat">Chat</a>

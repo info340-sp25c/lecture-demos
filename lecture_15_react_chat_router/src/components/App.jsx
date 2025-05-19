@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom'
 
 import { HeaderBar } from './HeaderBar.jsx';
 
@@ -33,29 +34,21 @@ function App(props) {
 
   const currentUrl = window.location.pathname;
   console.log('current url ', currentUrl);
-  let mainContent = null;
-
-  if (currentUrl == "/") {
-    mainContent = <Static.WelcomePage />
-  } else if (currentUrl == "/about") {
-    mainContent = <Static.AboutPage />
-  } else if (currentUrl == "/chat") {
-    mainContent = <ChatPage
-      currentUser={currentUser}
-      messageArray={messageStateArray}
-      addMessageFunction={addMessage}
-    />
-  } else if (currentUrl == "/signin") {
-    mainContent = <SignInPage currentUser={currentUser} changeUserFunction={changeUser} />
-  } else {
-    mainContent = <Static.ErrorPage />
-  }
-
 
   return (
     <div className="container-fluid d-flex flex-column">
       <HeaderBar currentUser={currentUser} />
-      {mainContent}
+      <Routes>
+        <Route path="home?" element={<Static.WelcomePage />} />
+        <Route path="about?" element={<Static.AboutPage />} />
+        <Route path="chat?" element={<ChatPage
+          currentUser={currentUser}
+          messageArray={messageStateArray}
+          addMessageFunction={addMessage}
+        />} />
+        <Route path="signin?" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUser} />} />
+        <Route path="*" element={<Static.ErrorPage />} />
+      </Routes>
     </div>
   );
 }
