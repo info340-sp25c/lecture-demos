@@ -28,6 +28,12 @@ function App(props) {
     setMessageStateArray(newArray); //update state & re-render
   }
 
+  const likeMessage = (msgObj, isLiked) => {
+    msgObj.isLiked = isLiked;
+    const newArray = [...messageStateArray]
+    setMessageStateArray(newArray)
+  }
+
   const changeUser = (newUserObj) => {
     setCurrentUser(newUserObj);
   }
@@ -45,6 +51,7 @@ function App(props) {
           currentUser={currentUser}
           messageArray={messageStateArray}
           addMessageFunction={addMessage}
+          likeMessageFunction={likeMessage}
         />} />
         <Route path="signin?" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUser} />} />
         <Route path="*" element={<Static.ErrorPage />} />

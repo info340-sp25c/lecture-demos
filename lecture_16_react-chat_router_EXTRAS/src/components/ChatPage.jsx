@@ -4,8 +4,8 @@ import { ChannelList } from './ChannelList.jsx';
 import { ChatPane } from './ChatPane.jsx';
 
 export default function ChatPage(props) {
-  const {currentUser, messageArray, addMessageFunction} = props;
- 
+  const { currentUser, messageArray, addMessageFunction, likeMessageFunction } = props;
+
   const channelNames = ["general", "channel-2", "birds", "dank-memes", "random"];
 
   return (
@@ -18,6 +18,7 @@ export default function ChatPage(props) {
           currentUser={currentUser}
           messageArray={messageArray}
           addMessageFunction={addMessageFunction}
+          likeMessageFunction={likeMessageFunction}
         />
       </div>
     </div>

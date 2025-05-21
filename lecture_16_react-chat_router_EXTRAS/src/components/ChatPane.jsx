@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 export function ChatPane(props) {
 
   // const currentChannel = "general" //hard code for the moment
-  const { messageArray, addMessageFunction, currentUser } = props;
+  const { messageArray, addMessageFunction, currentUser, likeMessageFunction } = props;
   const urlParamsObj = useParams();
   const currentChannel = urlParamsObj.whichchannel ?? "general";
   //RENDERING: what do we look like
@@ -20,7 +20,11 @@ export function ChatPane(props) {
   //* displaying display - what does it look like *//
   //DOM content [<MessageItem/>, <MessageItem/>]
   const messageItemArray = messagesToShow.map((messageObj) => {
-    const elem = <MessageItem messageData={messageObj} key={messageObj.timestamp} />
+    const elem = <MessageItem
+      messageData={messageObj}
+      key={messageObj.timestamp}
+      likeMessageFunction={likeMessageFunction}
+    />
     return elem; //put it in the new array!
   });
 
@@ -44,12 +48,14 @@ export function ChatPane(props) {
 }
 
 function MessageItem(props) {
-  const { userName, userImg, text } = props.messageData;
-
-  const [isLiked, setIsLiked] = useState(false);
+  const { messageData, likeMessageFunction } = props;
+  const { userName, userImg, text, isLiked } = messageData;
+  console.log('props in messageItem component', props)
+  // const [isLiked, setIsLiked] = useState(false);
 
   const handleClick = function (event) {
-    setIsLiked(!isLiked);
+    //   setIsLiked(!isLiked);
+    likeMessageFunction(messageData, !isLiked)
   }
 
 
