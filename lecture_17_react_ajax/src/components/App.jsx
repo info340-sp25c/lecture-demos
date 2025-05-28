@@ -28,11 +28,16 @@ function App(props) {
     const url = "https://api.github.com/search/repositories?q=" + queryInput + "&sort=stars"
     console.log('url', url)
 
-    const response = await fetch(url);
-    console.log('results of fetch', response)
-    const json = await response.json()
-    console.log('json', json)
-    setStateData(json.items)
+    try {
+      const response = await fetch(url);
+      console.log('results of fetch', response)
+      const json = await response.json()
+      console.log('json', json)
+      setStateData(json.items)
+    } catch (error) {
+      console.log("there was an error", error)
+    }
+
 
     // fetch(url).then((results) => {
     //   console.log("fetch, then", results)
