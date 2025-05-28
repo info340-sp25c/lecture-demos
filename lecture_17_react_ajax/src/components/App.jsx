@@ -28,14 +28,21 @@ function App(props) {
     const url = "https://api.github.com/search/repositories?q=" + queryInput + "&sort=stars"
     console.log('url', url)
 
-    fetch(url).then((results) => {
-      console.log("fetch, then", results)
-      return results.json()
-    }).then((jsonData) => {
-      console.log('json data', jsonData, jsonData.items)
-      setStateData(jsonData.items)
-    })
-    console.log("this is the next line after fetch in the code")
+    const response = await fetch(url);
+    console.log('results of fetch', response)
+    const json = await response.json()
+    console.log('json', json)
+    setStateData(json.items)
+
+    // fetch(url).then((results) => {
+    //   console.log("fetch, then", results)
+    //   return results.json()
+    // }).then((jsonData) => {
+    //   console.log('json data', jsonData, jsonData.items)
+    //   setStateData(jsonData.items)
+    // })
+    // console.log("this is the next line after fetch in the code")
+
 
   }
 
