@@ -25,15 +25,23 @@ function App(props) {
 
   const navigateTo = useNavigate(); //navigation hook
 
-  const dbRef = getDatabase();
-  const test_value_ref = firebaseRef(dbRef, "test_value")
-  firebaseSet(test_value_ref, "This is test data")
-  console.log("I saved something to firebase")
+  // const dbRef = getDatabase();
+  // const test_value_ref = firebaseRef(dbRef, "test_value")
+  // firebaseSet(test_value_ref, "This is test data")
+  // console.log("I saved something to firebase")
 
   //effect to run when the component first loads!
   useEffect(() => {
     //log in a default user
     changeUser(DEFAULT_USERS[1])
+    // RUN ONCE to get users messages in your DB
+    // for each message, add it to the database:
+    // const dbRef = getDatabase();
+    // const allMessagesRef = firebaseRef(dbRef, "allMessages")
+    // INITIAL_CHAT_LOG.forEach((message) => {
+    //   firebasePush(allMessagesRef, message)
+    // })
+    // console.log("no need to run this again, we have data!")
 
   }, []) //array is list of variables that will cause this to rerun if changed
 
