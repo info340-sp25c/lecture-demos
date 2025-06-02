@@ -16,11 +16,11 @@ import ChatPage from './ChatPage.jsx';
 import SignInPage from './SignInPage.jsx';
 import * as Static from './StaticPages.jsx';
 
-import INITIAL_CHAT_LOG from '../data/chat_log.json'
+//import INITIAL_CHAT_LOG from '../data/chat_log.json'
 import DEFAULT_USERS from '../data/users.json';
 
 function App(props) {
-  const [messageStateArray, setMessageStateArray] = useState(INITIAL_CHAT_LOG);
+  const [messageStateArray, setMessageStateArray] = useState([]);
   const [currentUser, setCurrentUser] = useState(DEFAULT_USERS[0]) //initialize;
 
   const navigateTo = useNavigate(); //navigation hook
@@ -42,6 +42,31 @@ function App(props) {
     //   firebasePush(allMessagesRef, message)
     // })
     // console.log("no need to run this again, we have data!")
+    const dbRef = getDatabase()
+    const allMessagesRef = firebaseRef(dbRef, "allMessages")
+
+    // this is like addEventListener
+    const unregisterAllMsgFn = onValue(allMessagesRef, (snapshot) => {
+      console.log("messages data changed")
+      const dataObj = snapshot.val();
+      console.log("dataobj", dataObj)
+
+      // update the messageStateArray
+      // turn the dataobj into an array
+
+      const newMsgArray = Object.keys(dataObj).map((keyString) => {
+        return dataObj[keyString]
+      })
+
+      console.log('new message array to save to state', newMsgArray)
+      setMessageStateArray(newMsgArray)
+    })
+
+    function cleanup() {
+      unregisterAllMsgFn(); // unregister database listener
+    }
+
+    return cleanup
 
   }, []) //array is list of variables that will cause this to rerun if changed
 
