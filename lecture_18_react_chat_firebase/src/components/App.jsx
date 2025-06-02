@@ -25,6 +25,11 @@ function App(props) {
 
   const navigateTo = useNavigate(); //navigation hook
 
+  const dbRef = getDatabase();
+  const test_value_ref = firebaseRef(dbRef, "test_value")
+  firebaseSet(test_value_ref, "This is test data")
+  console.log("I saved something to firebase")
+
   //effect to run when the component first loads!
   useEffect(() => {
     //log in a default user
