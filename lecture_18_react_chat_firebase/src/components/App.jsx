@@ -87,8 +87,13 @@ function App(props) {
       "timestamp": Date.now(),
       "channel": channel
     }
-    const newMessageArray = [...messageStateArray, newMessageObj];
-    setMessageStateArray(newMessageArray); //update state & rerender
+    // const newMessageArray = [...messageStateArray, newMessageObj];
+    const dbRef = getDatabase();
+
+    const allMessagesRef = firebaseRef(dbRef, "allMessages")
+    firebasePush(allMessagesRef, newMessageObj)
+    console.log("just saved this message in firebase", newMessageObj)
+    // setMessageStateArray(newMessageArray); //update state & rerender
   }
 
   return (
