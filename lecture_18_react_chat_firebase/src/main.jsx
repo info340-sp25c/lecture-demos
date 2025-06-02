@@ -16,13 +16,12 @@ import './index.css';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDf3znXTAMgWnj31XeKEy3ljpxMe4i2Y6k",
-  authDomain: "class-demo-fb.firebaseapp.com",
-  databaseURL: "https://class-demo-fb-default-rtdb.firebaseio.com",
-  projectId: "class-demo-fb",
-  storageBucket: "class-demo-fb.firebasestorage.app",
-  messagingSenderId: "453368934476",
-  appId: "1:453368934476:web:221ac9d2b37a460d5a44e9"
+  apiKey: "fake_key",
+  authDomain: "fake_domain",
+  projectId: "fake_project",
+  storageBucket: "fake_bucket",
+  messagingSenderId: "fake_id",
+  appId: "fake_app_id"
 };
 
 // Initialize Firebase
