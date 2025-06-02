@@ -1,4 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  getDatabase,
+  ref as firebaseRef,
+  set as firebaseSet,
+  push as firebasePush,
+  onValue
+} from 'firebase/database'
+
 
 import { Routes, Route, Outlet, Navigate, useNavigate } from 'react-router';
 
@@ -27,7 +35,7 @@ function App(props) {
   const changeUser = (userObj) => {
     console.log("changing user to", userObj.userName);
     setCurrentUser(userObj);
-    if(userObj.userId !== null){
+    if (userObj.userId !== null) {
       navigateTo('/chat/'); //go to chat after login
     }
   }
@@ -50,20 +58,20 @@ function App(props) {
       <HeaderBar currentUser={currentUser} />
 
       <Routes>
-        <Route index element={ <Static.WelcomePage /> }/>
-        <Route path="/about" element={ <Static.AboutPage /> } />
+        <Route index element={<Static.WelcomePage />} />
+        <Route path="/about" element={<Static.AboutPage />} />
 
         <Route element={<ProtectedPage currentUser={currentUser} />} >
           <Route path="chat/:chanName?" element={
-            <ChatPage 
-              currentUser={currentUser} 
+            <ChatPage
+              currentUser={currentUser}
               messageArray={messageStateArray}
               addMessageFunction={addMessage}
-              />
+            />
           } />
         </Route>
-        <Route path="/signin" element={ 
-          <SignInPage currentUser={currentUser} changeUserFunction={changeUser} />} 
+        <Route path="/signin" element={
+          <SignInPage currentUser={currentUser} changeUserFunction={changeUser} />}
         />
         <Route path="*" element={<Static.ErrorPage />} />
       </Routes>
@@ -72,11 +80,11 @@ function App(props) {
 }
 
 function ProtectedPage(props) {
-  const {currentUser} = props;
+  const { currentUser } = props;
 
   //...determine if user is logged in
-  if(currentUser.userId === null) { //not undefined
-    return <Navigate to="/signin"/>
+  if (currentUser.userId === null) { //not undefined
+    return <Navigate to="/signin" />
   }
   else { //otherwise, show the child route content
     return <Outlet />
