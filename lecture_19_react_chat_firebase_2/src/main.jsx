@@ -14,13 +14,13 @@ import './index.css';
 // TODO: Put your web app's firebase config here
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDf3znXTAMgWnj31XeKEy3ljpxMe4i2Y6k",
-  authDomain: "class-demo-fb.firebaseapp.com",
-  databaseURL: "https://class-demo-fb-default-rtdb.firebaseio.com",
-  projectId: "class-demo-fb",
-  storageBucket: "class-demo-fb.firebasestorage.app",
-  messagingSenderId: "453368934476",
-  appId: "1:453368934476:web:221ac9d2b37a460d5a44e9"
+  apiKey: "fakeItem",
+  authDomain: "fakeItem",
+  databaseURL: "fakeItem",
+  projectId: "fakeItem",
+  storageBucket: "fakeItem",
+  messagingSenderId: "fakeItem",
+  appId: "fakeItem"
 };
 
 // Initialize Firebase
