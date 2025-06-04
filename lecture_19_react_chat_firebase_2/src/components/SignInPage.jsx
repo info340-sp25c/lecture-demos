@@ -1,4 +1,7 @@
 import React from 'react';
+import StyleFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { getAuth, EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -8,6 +11,22 @@ import DEFAULT_USERS from '../data/users.json';
 export default function SignInPage(props) {
 
   const { currentUser, changeUserFunction } = props;
+  const auth = getAuth();
+
+  const firebaseUIConfig = {
+    signInOptions: [
+      GoogleAuthProvider.PROVIDER_ID,
+      { provider: EmailAuthProvider.PROVIDER_ID, requiredDisplayName: true }
+    ],
+    signInFlow: 'popup', // don't redirect to authenticate
+    credentialHelper: 'none', // don't show the email account chooser
+    callbacks: { // "lifecycle" callbacks
+      signInSuccessWithAuthResult: () => {
+        return false; // don't redirect after authentication
+      }
+    }
+  }
+
 
   const handleClick = (event) => {
     const whichUser = event.currentTarget.name //access button, not image
@@ -18,11 +37,11 @@ export default function SignInPage(props) {
 
   //convenience
   const userButtons = DEFAULT_USERS.map((userObj) => {
-    if(userObj.userId === currentUser.userId){
+    if (userObj.userId === currentUser.userId) {
       return null; //don't include!
     }
     return (
-      <Dropdown.Item className="user-icon" key={userObj.userName} 
+      <Dropdown.Item className="user-icon" key={userObj.userName}
         name={userObj.userId} onClick={handleClick}
       >
         <img src={userObj.userImg} alt={userObj.userName + " avatar"} />
@@ -34,7 +53,7 @@ export default function SignInPage(props) {
   return (
     <div className="card bg-light">
       <div className="container card-body">
-
+        <StyleFirebaseAuth firebaseAuth={auth} uiConfig={firebaseUIConfig} />
         <p className="lead">Pick a user:</p>
         <Dropdown>
           <Dropdown.Toggle variant="light">
