@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Routes, Route, Outlet, Navigate, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database'
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import { HeaderBar } from './HeaderBar.jsx';
 import ChatPage from './ChatPage.jsx';
@@ -22,6 +24,22 @@ function App(props) {
   useEffect(() => {
     //log in a default user
     //changeUser(DEFAULT_USERS[1])
+    const auth = getAuth();
+    onAuthStateChanged(auth, (firebaseUser) => {
+      console.log("something has changed!!!", firebaseUser)
+      if (firebaseUser) {
+        // make firebase user match our expectations about user data field names
+        firebaseUser.userId = firebaseUser.uid
+        firebaseUser.userName = firebaseUser.displayName
+        firebaseUser.userImg = firebaseUser.photoURL || '/img/null.png'
+
+        setCurrentUser(firebaseUser)
+      } else {
+        // FOR NOW, log in as the null user
+        setCurrentUser(DEFAULT_USERS[0])
+      }
+    })
+
   }, []) //array is list of variables that will cause this to rerun if changed
 
   //effect to run when the component first loads
@@ -34,16 +52,16 @@ function App(props) {
     //fetch message data from firebase
     onValue(allMessagesRef, (snapshot) => {
       const allMessagesObj = snapshot.val();
-      if(allMessagesObj === null){
+      if (allMessagesObj === null) {
         setMessageStateArray([]); //no content
         return; //break;
       }
-      
+
       const keyArray = Object.keys(allMessagesObj);
       const allMessagesArray = keyArray.map((keyString) => {
         const messageObj = allMessagesObj[keyString];
         messageObj.firebaseKey = keyString;
-        return messageObj;        
+        return messageObj;
       })
       setMessageStateArray(allMessagesArray); //update state & rerender
     });
@@ -53,7 +71,7 @@ function App(props) {
   const changeUser = (userObj) => {
     console.log("logging in as", userObj.userName);
     setCurrentUser(userObj);
-    if(userObj.userId !== null){
+    if (userObj.userId !== null) {
       navigateTo('/chat/general'); //go to chat after login
     }
   }
@@ -78,21 +96,21 @@ function App(props) {
       <HeaderBar currentUser={currentUser} />
 
       <Routes>
-        <Route index element={ <Static.WelcomePage /> }/>
-        <Route path="about" element={ <Static.AboutPage /> } />
-        <Route path="signin" element={ 
+        <Route index element={<Static.WelcomePage />} />
+        <Route path="about" element={<Static.AboutPage />} />
+        <Route path="signin" element={
           <SignInPage currentUser={currentUser} changeUserFunction={changeUser} />
         } />
 
         <Route element={<ProtectedPage currentUser={currentUser} />} >
           <Route path="chat/:channel?" element={
-            <ChatPage 
-              currentUser={currentUser} 
+            <ChatPage
+              currentUser={currentUser}
               messageArray={messageStateArray}
               addMessageFunction={addMessage}
-              />
+            />
           } />
-          <Route path="profile" element={<ProfilePage currentUser={currentUser} />}/>
+          <Route path="profile" element={<ProfilePage currentUser={currentUser} />} />
         </Route>
         <Route path="*" element={<Static.ErrorPage />} />
       </Routes>
@@ -102,7 +120,7 @@ function App(props) {
 
 function ProtectedPage(props) {
   //...determine if user is logged in
-  if(props.currentUser.userId === null) { //not undefined
+  if (props.currentUser.userId === null) { //not undefined
     return <p>Sign in to view.</p>
     // return <Navigate to="/signin"/>
   }
