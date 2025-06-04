@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
 
 export function HeaderBar(props) {
   const currentUser = props.currentUser;
 
   const handleSignOut = (event) => {
+    const auth = getAuth();
+    signOut(auth);
     console.log("signing out");
   }
 
@@ -24,24 +27,24 @@ export function HeaderBar(props) {
           <li className="nav-item">
             <NavLink className="nav-link" to="/about">About</NavLink>
           </li>
-          {currentUser.userId && 
-          <>
+          {currentUser.userId &&
+            <>
+              <li className="nav-item">
+                <NavLink to="/profile" className="nav-link">
+                  <img src={currentUser.userImg} alt={currentUser.userName + " avatar"} />
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-secondary ms-2" onClick={handleSignOut}>Sign Out</button>
+              </li>
+            </>
+          }
+          {!currentUser.userId &&
             <li className="nav-item">
-              <NavLink to="/profile" className="nav-link">
-                <img src={currentUser.userImg} alt={currentUser.userName + " avatar"} />
+              <NavLink className="nav-link" to="/signin">Sign In
               </NavLink>
             </li>
-            <li className="nav-item">
-              <button className="btn btn-secondary ms-2" onClick={handleSignOut}>Sign Out</button>
-            </li>
-          </>
-        }
-        {!currentUser.userId &&
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/signin">Sign In
-            </NavLink>
-          </li>
-        }
+          }
         </ul>
       </nav>
 
